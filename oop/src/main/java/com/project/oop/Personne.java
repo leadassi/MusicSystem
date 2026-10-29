@@ -1,15 +1,19 @@
+package com.project.oop;
+
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
 // Personne.java — classe abstraite n°1
 public abstract class Personne {
-    private static int compteur = 1;
+    private static final AtomicInteger PROCHAIN_ID = new AtomicInteger(1);
 
-    private final int id;
+    private final int id = PROCHAIN_ID.getAndIncrement();
     private String nom;
     private String prenom;
     private String email;
     private String telephone;
 
     protected Personne(String nom, String prenom, String email, String telephone) {
-        this.id = compteur++;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -18,7 +22,7 @@ public abstract class Personne {
 
     /** Constructeur de copie */
     protected Personne(Personne autre) {
-        this.id = autre.id;
+        Objects.requireNonNull(autre, "La personne à copier est obligatoire.");
         this.nom = autre.nom;
         this.prenom = autre.prenom;
         this.email = autre.email;

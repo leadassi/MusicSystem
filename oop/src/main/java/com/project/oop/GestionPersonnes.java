@@ -1,3 +1,5 @@
+package com.project.oop;
+
 // GestionPersonnes.java
 import java.util.ArrayList;
 import java.util.List;

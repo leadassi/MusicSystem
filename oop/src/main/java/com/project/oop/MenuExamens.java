@@ -1,3 +1,5 @@
+package com.project.oop;
+
 // MenuExamens.java
 import java.time.LocalDateTime;
 import java.util.Scanner;

@@ -1,5 +1,8 @@
+package com.project.oop;
+
 // Professeur.java
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Professeur extends Personne {
@@ -8,7 +11,7 @@ public class Professeur extends Personne {
 
     public Professeur(String nom, String prenom, String email, String telephone, double tauxHoraire) {
         super(nom, prenom, email, telephone);
-        this.tauxHoraire = tauxHoraire;
+        setTauxHoraire(tauxHoraire);
     }
 
     /** Constructeur de copie */
@@ -28,8 +31,16 @@ public class Professeur extends Personne {
     public boolean peutEnseigner(Instrument i) { return specialites.contains(i); }
 
     public double getTauxHoraire() { return tauxHoraire; }
-    public void setTauxHoraire(double tauxHoraire) { this.tauxHoraire = tauxHoraire; }
-    public List<Instrument> getSpecialites() { return specialites; }
+    public void setTauxHoraire(double tauxHoraire) {
+        if (!Double.isFinite(tauxHoraire) || tauxHoraire < 0) {
+            throw new IllegalArgumentException("Le taux horaire doit être positif ou nul.");
+        }
+        this.tauxHoraire = tauxHoraire;
+    }
+
+    public List<Instrument> getSpecialites() {
+        return Collections.unmodifiableList(specialites);
+    }
 
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package com.project.oop;
+
 // MenuPersonnes.java
 import java.util.Scanner;
 

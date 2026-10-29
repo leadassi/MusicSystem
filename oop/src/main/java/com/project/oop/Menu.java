@@ -1,3 +1,5 @@
+package com.project.oop;
+
 // Menu.java — classe abstraite n°2
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

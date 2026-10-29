@@ -1,3 +1,5 @@
+package com.project.oop;
+
 // GestionExamens.java
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class GestionExamens {
         if (salle == null) throw new IllegalArgumentException("Salle inconnue : " + nomSalle);
         if (instrument == null) throw new IllegalArgumentException("Instrument inconnu : " + nomInstrument);
         if (capaciteMax < 1) throw new IllegalArgumentException("La capacite doit etre >= 1.");
+        if (capaciteMax > salle.getCapacite())
+            throw new IllegalArgumentException("La capacité de l'examen dépasse celle de la salle.");
 
         Activite ex = new Activite(TypeActivite.EXAMEN, libelle, debut, dureeMinutes,
                                    capaciteMax, null, salle, instrument);
@@ -24,6 +28,8 @@ public class GestionExamens {
 
     /** Règle 3 : inscription refusée si la capacité max est atteinte */
     public Participation inscrire(Etudiant e, Activite ex) {
+        if (e == null) throw new IllegalArgumentException("L'étudiant est obligatoire.");
+        if (ex == null) throw new IllegalArgumentException("L'examen est obligatoire.");
         if (ex.getType() != TypeActivite.EXAMEN)
             throw new IllegalArgumentException("L'activite " + ex.getId() + " n'est pas un examen.");
         if (ex.estInscrit(e))
@@ -32,7 +38,7 @@ public class GestionExamens {
             throw new IllegalStateException("Inscriptions fermees : capacite max atteinte ("
                     + ex.getCapaciteMax() + " places).");
 
-        Participation p = new Participation(e, ex, 0);
+        Participation p = new Participation(e, ex);
         ex.ajouterParticipation(p);
         ecole.ajouterParticipation(p);
         return p;

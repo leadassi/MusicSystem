@@ -2,7 +2,7 @@
 
 Application de gestion pour le Conservatoire Virtuel, une école de musique.
 
-## Fonctionnalités en cours
+## Fonctionnalités
 
 Les menus de gestion des personnes et des examens ont été ajoutés :
 
@@ -11,14 +11,20 @@ Les menus de gestion des personnes et des examens ont été ajoutés :
 - **Menu** : classe abstraite commune aux sous-menus, avec boucle de navigation, lecture et validation des saisies (nombres, dates et valeurs d’énumération) et affichage des erreurs.
 - **GestionPersonnes** et **GestionExamens** : services appelés par les menus pour effectuer les opérations sur les données de l’école. La gestion des examens vérifie notamment la salle et l’instrument, les inscriptions en double, la capacité et la validité des notes.
 
-Le projet est encore en cours de développement. Les menus s’appuient sur les classes métier de l’école (étudiants, examens, activités, inscriptions et résultats) et doivent être reliés au point d’entrée de l’application.
+Les classes métier utilisées par ces menus (personnes, école, salles, instruments, activités, participations et résultats) sont présentes dans le projet. L'application reste en développement : le démarrage Spring Boot n'est pas encore relié à ces menus console, et les salles/instruments doivent être ajoutés à l'école avant de pouvoir créer un examen.
 
 ## Compilation
 
-Le projet Maven se trouve dans le dossier `oop`. Maven compile les sources Java placées dans `oop/src/main/java` (et ses sous-dossiers), pas celles placées dans `oop/src/main/resources`. Les fichiers Java des menus et de leur gestion sont actuellement rangés dans `oop/src/main/resources`, dans des sous-dossiers portant leur nom : ils ne sont donc pas inclus dans la compilation Maven à cet emplacement.
+Le projet Maven se trouve dans le dossier `oop`. Les sources de l'application sont dans `oop/src/main/java/com/project/oop` et déclarent le package `com.project.oop`. Les tests sont dans `oop/src/test/java/com/project/oop`. Les ressources non Java, comme `application.properties`, restent dans `oop/src/main/resources`.
 
-Pour les compiler avec Maven, placez les fichiers Java dans un package sous `oop/src/main/java` et faites correspondre la déclaration `package` au chemin du dossier. Vous pourrez ensuite compiler depuis `oop` avec :
+Pour compiler le projet depuis `oop` :
 
 ```powershell
 .\mvnw.cmd clean compile
+```
+
+Pour compiler et exécuter les tests :
+
+```powershell
+.\mvnw.cmd test
 ```
